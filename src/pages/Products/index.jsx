@@ -1,7 +1,9 @@
 import React from "react";
 import ProductList from "../../utils/Products.json";
+import { useNavigate } from "react-router-dom";
 
-export default function Products() {
+export default function Products({handleNavigtionClick, index}) {
+  const navigate = useNavigate()
   return (
     <>
       <div className="mb-4 pt-2 relative mx-auto text-gray-600 flex items-center gap-2">
@@ -25,6 +27,22 @@ export default function Products() {
             />
           </svg>
         </button>
+        <div className="flex items-center bg-black text-white gap-1 py-1.5 px-3 cursor-pointer" onClick={() => navigate("/product/new")}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+              clipRule="evenodd"
+            />
+          </svg>
+
+          <button>Add Product</button>
+        </div>
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -49,30 +67,35 @@ export default function Products() {
           </thead>
           <tbody>
             {ProductList.map((product, index) => {
-              return <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              return (
+                <tr
+                  key={index}
+                  className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                 >
-                  {product.productName}
-                </th>
-                <td className="px-6 py-4">
-                  <select name="" id="">
-                    <option value="">In Stock</option>
-                    <option value="">Out of Stock</option>
-                  </select>
-                </td>
-                <td className="px-6 py-4">{product.category}</td>
-                <td className="px-6 py-4">${product.price}</td>
-                <td className="px-6 py-4 flex items-center gap-2">
-                  <button className="bg-gray-900 py-1 px-3 text-white">
-                    Edit
-                  </button>
-                  <button className="bg-[#eb4d4b] py-1 px-3 text-white">
-                    Delete
-                  </button>
-                </td>
-              </tr>;
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {product.productName}
+                  </th>
+                  <td className="px-6 py-4">
+                    <select name="" id="">
+                      <option value="">In Stock</option>
+                      <option value="">Out of Stock</option>
+                    </select>
+                  </td>
+                  <td className="px-6 py-4">{product.category}</td>
+                  <td className="px-6 py-4">${product.price}</td>
+                  <td className="px-6 py-4 flex items-center gap-2">
+                    <button className="bg-gray-900 py-1 px-3 text-white">
+                      Edit
+                    </button>
+                    <button className="bg-[#eb4d4b] py-1 px-3 text-white">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
             })}
           </tbody>
         </table>

@@ -4,6 +4,7 @@ import Login from "../pages/Authentication/Login";
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/Auth";
+import AddProduct from "../pages/AddProduct";
 
 export default function Router() {
   const { user } = useContext(AuthContext);
@@ -16,6 +17,10 @@ export default function Router() {
     {
       path: "/auth/login",
       element: <>{user ? <Navigate to="/" /> : <Login />}</>,
+    },
+    {
+      path: "/product/new",
+      element: <>{!user ? <Navigate to="/auth/login" /> : <AddProduct />}</>,
     },
     // {
     //   path: "/auth/register",

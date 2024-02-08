@@ -1,5 +1,6 @@
 import React from "react";
 import TeamList from "../../utils/Team.json";
+import AddTeam from "../../components/AddTeam";
 
 export default function Teams() {
   return (
@@ -25,6 +26,7 @@ export default function Teams() {
             />
           </svg>
         </button>
+        <AddTeam/>
       </div>
       <div className="relative overflow-x-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

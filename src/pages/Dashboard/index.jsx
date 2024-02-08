@@ -1,8 +1,10 @@
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Identicon from "react-identicons";
 import Teams from "../Teams";
 import Products from "../Products";
+import AddProduct from "../AddProduct";
 
 const user = {
   name: "Tom Cook",
@@ -35,9 +37,10 @@ export default function Dashboard() {
       }
       return { ...item, current: false };
     });
-    
+
     setNavigation(updatedNavigation);
   };
+
   return (
     <>
       <div className="min-h-full">
@@ -148,7 +151,7 @@ export default function Dashboard() {
 
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item) => (
+                  {navigation.map((item, index) => (
                     <Disclosure.Button
                       key={item.name}
                       as="a"
@@ -168,28 +171,16 @@ export default function Dashboard() {
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
+                      <Identicon size="40" string={user.email} />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user.name}
+                        {user.username}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
                         {user.email}
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
@@ -227,14 +218,24 @@ export default function Dashboard() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {navigation.map((item,index) => {
-                if(item.current === true){
-                    if(item.name === "Team"){
-                        return <Teams key={index}/>
-                    } else if(item.name === "Products"){
-                        return <Products key={index}/>
-                    }
+            {navigation.map((item, index) => {
+              if (item.current === true) {
+                if (item.name === "Team") {
+                  return <Teams key={index} />;
+                } else if (item.name === "Products") {
+                  return (
+                    <Products
+                      index={index}
+                      handleNavigationClick={handleNavigationClick}
+                      key={index}
+                    />
+                  );
+                } else if (item.name === "Dashboard") {
+                  return (
+                    <div key={index}></div>
+                  );
                 }
+              }
             })}
           </div>
         </main>
