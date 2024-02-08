@@ -1,126 +1,82 @@
 import React from "react";
+import ProductList from "../../utils/Products.json";
 
 export default function Products() {
   return (
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              Product name
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Color
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Category
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Price
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Apple MacBook Pro 17"
-            </th>
-            <td class="px-6 py-4">Silver</td>
-            <td class="px-6 py-4">Laptop</td>
-            <td class="px-6 py-4">$2999</td>
-            <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Microsoft Surface Pro
-            </th>
-            <td class="px-6 py-4">White</td>
-            <td class="px-6 py-4">Laptop PC</td>
-            <td class="px-6 py-4">$1999</td>
-            <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Magic Mouse 2
-            </th>
-            <td class="px-6 py-4">Black</td>
-            <td class="px-6 py-4">Accessories</td>
-            <td class="px-6 py-4">$99</td>
-            <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Google Pixel Phone
-            </th>
-            <td class="px-6 py-4">Gray</td>
-            <td class="px-6 py-4">Phone</td>
-            <td class="px-6 py-4">$799</td>
-            <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Apple Watch 5
-            </th>
-            <td class="px-6 py-4">Red</td>
-            <td class="px-6 py-4">Wearables</td>
-            <td class="px-6 py-4">$999</td>
-            <td class="px-6 py-4">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="mb-4 pt-2 relative mx-auto text-gray-600 flex items-center gap-2">
+        <input
+          className="flex-1 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-md text-sm focus:outline-none"
+          type="search"
+          name="search"
+          placeholder="Search"
+        />
+        <button type="submit" className="bg-black text-white py-2 px-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-5 h-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Product name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Stock
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Category
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Price
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {ProductList.map((product, index) => {
+              return <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {product.productName}
+                </th>
+                <td className="px-6 py-4">
+                  <select name="" id="">
+                    <option value="">In Stock</option>
+                    <option value="">Out of Stock</option>
+                  </select>
+                </td>
+                <td className="px-6 py-4">{product.category}</td>
+                <td className="px-6 py-4">${product.price}</td>
+                <td className="px-6 py-4 flex items-center gap-2">
+                  <button className="bg-gray-900 py-1 px-3 text-white">
+                    Edit
+                  </button>
+                  <button className="bg-[#eb4d4b] py-1 px-3 text-white">
+                    Delete
+                  </button>
+                </td>
+              </tr>;
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
