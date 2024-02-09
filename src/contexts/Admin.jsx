@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { useState, useEffect } from "react";
+import { AuthContext } from "./Auth";
+import { auth } from "../../firebase";
 
 export const AdminContext = createContext();
 
@@ -29,7 +31,16 @@ export const AdminProvider = ({ children }) => {
         const response = await fetch(`${import.meta.env.VITE_API_URI}/admin`);
         if (response.ok) {
           const data = await response.json();
+          console.log(user, data);
           dispatch({ type: "ADD_ADMIN", payload: data });
+          // @dev only let those user's login who is listed on db else signout with message
+          //   for (let i = 0; i < data.length; i++) {
+          //     if (user && data && data.email == user.email) {
+          //       return dispatch({ type: "ADD_ADMIN", payload: data });
+          //     }
+          //   }
+          //   console.log(data)
+          //   const isAdmin = data.find((e) => e.email === user.email);
         } else {
           throw new Error("Failed to fetch admin data");
         }
