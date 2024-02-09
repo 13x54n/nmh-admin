@@ -95,7 +95,7 @@ export default function Teams() {
                   <td className="px-6 py-4">{item.email}</td>
                   <td className="px-6 py-4">{item.role}</td>
                   <td className="px-6 py-4 flex items-center gap-2">
-                    <UpdateTeam />
+                    <UpdateTeam item={item} />
                     <button
                       className="bg-[#eb4d4b] py-1 px-3 text-white flex flex-row gap-1 items-center"
                       onClick={() => handleDeleteAdmin(item)}

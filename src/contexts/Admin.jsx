@@ -10,15 +10,9 @@ const adminReducer = (state, action) => {
     case "ADD_ADMIN":
       return [action.payload];
     case "UPDATE_ADMIN":
-      return [
-        state[0].map((admin) =>
-          admin._id === action.payload._id
-            ? { ...admin, ...action.payload.data }
-            : admin
-        ),
-      ];
+      console.log(action.payload);
+      return [action.payload];
     case "DELETE_ADMIN":
-      console.log(state, action.payload);
       return [state[0].filter((admin) => admin._id !== action.payload)];
     default:
       return state;
@@ -51,10 +45,10 @@ export const AdminProvider = ({ children }) => {
     dispatch({ type: "ADD_ADMIN", payload: adminData });
   };
 
-  const updateAdmin = (adminId, adminData) => {
+  const updateAdmin = (adminData) => {
     dispatch({
       type: "UPDATE_ADMIN",
-      payload: { id: adminId, data: adminData },
+      payload: adminData,
     });
   };
 

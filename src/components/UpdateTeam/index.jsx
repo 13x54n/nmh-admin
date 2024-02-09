@@ -3,19 +3,19 @@ import { Dialog, Transition } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { AdminContext } from "../../contexts/Admin";
 
-export default function UpdateTeam() {
+export default function UpdateTeam({item}) {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("admin");
+  const [name, setName] = useState(item.name);
+  const [email, setEmail] = useState(item.email);
+  const [role, setRole] = useState(item.role);
 
   const cancelButtonRef = useRef(null);
-  const { admin, addAdmin } = useContext(AdminContext);
+  const { admin, updateAdmin } = useContext(AdminContext);
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URI}/admin`, {
-        method: "POST",
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/admin/update/${item._id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -25,14 +25,15 @@ export default function UpdateTeam() {
       if (response.ok) {
         const data = await response.json();
 
-        addAdmin([...admin[0], data]);
+        const prevData = admin[0].filter((admin) => admin._id !== item._id)
+        updateAdmin([...prevData, data]);
 
-        console.log("Admin created:", data);
+        console.log("Admin Updated:", data);
         setEmail("");
         setName("");
         setRole("admin");
 
-        toast("Team member added!");
+        toast("Team member updated!");
       }
     } catch (error) {
       console.error("Error creating admin:", error);
@@ -148,7 +149,7 @@ export default function UpdateTeam() {
                         className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 sm:ml-3 sm:w-auto"
                         onClick={() => handleSubmit()}
                       >
-                        Add Member
+                        Update Member
                       </button>
                       <button
                         type="button"
