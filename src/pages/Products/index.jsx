@@ -2,8 +2,9 @@ import React from "react";
 import ProductList from "../../utils/Products.json";
 import { useNavigate } from "react-router-dom";
 
-export default function Products({handleNavigtionClick, index}) {
+export default function Products() {
   const navigate = useNavigate()
+  
   return (
     <>
       <div className="mb-4 pt-2 relative mx-auto text-gray-600 flex items-center gap-2">

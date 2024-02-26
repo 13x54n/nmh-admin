@@ -8,6 +8,7 @@ export default function Teams() {
 
   const handleDeleteAdmin = async (e) => {
     const deleteData = async () => {
+      deleteAdmin(e._id);
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URI}/admin/delete/${e._id}`,
@@ -23,9 +24,8 @@ export default function Teams() {
         if (response.ok) {
           // Delete operation successful
           console.log("Data deleted successfully");
-          deleteAdmin(e._id);
-        } else {
           // Delete operation failed
+        } else {
           console.log("Failed to delete data");
         }
       } catch (error) {
@@ -81,7 +81,7 @@ export default function Teams() {
           </thead>
           <tbody>
             {admin &&
-              admin[0].map((item, index) => (
+              admin.map((item, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"

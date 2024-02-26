@@ -25,13 +25,14 @@ export default function UpdateTeam({item}) {
       if (response.ok) {
         const data = await response.json();
 
-        const prevData = admin[0].filter((admin) => admin._id !== item._id)
+        const prevData = admin.filter((admin) => admin._id !== item._id)
         updateAdmin([...prevData, data]);
 
-        console.log("Admin Updated:", data);
         setEmail("");
         setName("");
         setRole("admin");
+
+        setOpen(false)
 
         toast("Team member updated!");
       }

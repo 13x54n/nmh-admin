@@ -93,7 +93,7 @@ export default function Dashboard() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.photoURL}
+                              src={user && user.photoURL}
                               alt=""
                             />
                             <p className="font-md">{user.displayName}</p>

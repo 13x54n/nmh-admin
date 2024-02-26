@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { useState, useEffect } from "react";
-import { AuthContext } from "./Auth";
-import { auth } from "../../firebase";
 
 export const AdminContext = createContext();
 
@@ -10,12 +8,11 @@ export const AdminContext = createContext();
 const adminReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ADMIN":
-      return [action.payload];
+      return [...action.payload];
     case "UPDATE_ADMIN":
-      console.log(action.payload);
-      return [action.payload];
+      return [...action.payload];
     case "DELETE_ADMIN":
-      return [state[0].filter((admin) => admin._id !== action.payload)];
+      return state.filter((admin) => admin._id !== action.payload);
     default:
       return state;
   }
@@ -31,9 +28,11 @@ export const AdminProvider = ({ children }) => {
         const response = await fetch(`${import.meta.env.VITE_API_URI}/admin`);
         if (response.ok) {
           const data = await response.json();
-          console.log(user, data);
+
           dispatch({ type: "ADD_ADMIN", payload: data });
-          // @dev only let those user's login who is listed on db else signout with message
+          /** 
+          @dev only let those user's login who is listed on db else signout with message
+          */
           //   for (let i = 0; i < data.length; i++) {
           //     if (user && data && data.email == user.email) {
           //       return dispatch({ type: "ADD_ADMIN", payload: data });

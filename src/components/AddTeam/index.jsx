@@ -25,14 +25,14 @@ export default function AddTeam() {
       if (response.ok) {
         const data = await response.json();
 
-        addAdmin([...admin[0], data])
+        addAdmin([...admin, data])
 
-        console.log("Admin created:", data);
         setEmail("");
         setName("");
         setRole("admin");
 
         toast("Team member added!");
+        setOpen(false)
       }
     } catch (error) {
       console.error("Error creating admin:", error);
