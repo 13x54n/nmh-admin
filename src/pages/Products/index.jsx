@@ -13,7 +13,7 @@ export default function Products() {
         const response = await fetch(`${import.meta.env.VITE_API_URI}/product`);
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
+
           setProducts(data)
         } else {
           throw new Error("Failed to fetch admin data");
@@ -109,7 +109,7 @@ export default function Products() {
                       <option value="">Out of Stock</option>
                     </select>
                   </td>
-                  <td className="px-6 py-4">{product.category}</td>
+                  <td className="px-6 py-4">{product.category.name}</td>
                   <td className="px-6 py-4">${product.price}</td>
                   <td className="px-6 py-4 flex items-center gap-2">
                     <button className="bg-gray-900 py-1 px-3 text-white">
