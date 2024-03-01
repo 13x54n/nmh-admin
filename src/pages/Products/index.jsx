@@ -1,10 +1,31 @@
-import React from "react";
-import ProductList from "../../utils/Products.json";
+import React, { useEffect, useState } from "react";
+// import ProductList from "../../utils/Products.json";
 import { useNavigate } from "react-router-dom";
 
 export default function Products() {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URI}/product`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data)
+          setProducts(data)
+        } else {
+          throw new Error("Failed to fetch admin data");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <div className="mb-4 pt-2 relative mx-auto text-gray-600 flex items-center gap-2">
@@ -28,7 +49,10 @@ export default function Products() {
             />
           </svg>
         </button>
-        <div className="flex items-center bg-black text-white gap-1 py-1.5 px-3 cursor-pointer" onClick={() => navigate("/product/new")}>
+        <div
+          className="flex items-center bg-black text-white gap-1 py-1.5 px-3 cursor-pointer"
+          onClick={() => navigate("/product/new")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -67,7 +91,7 @@ export default function Products() {
             </tr>
           </thead>
           <tbody>
-            {ProductList.map((product, index) => {
+            {products.map((product, index) => {
               return (
                 <tr
                   key={index}
@@ -77,7 +101,7 @@ export default function Products() {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {product.productName}
+                    {product.name}
                   </th>
                   <td className="px-6 py-4">
                     <select name="" id="">
